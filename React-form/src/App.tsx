@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ChangeEvent, FormEvent, useRef } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const nombre = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const form = e.target.className.valueOf;
+    console.log(form);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="name">Nombre</label>
+          <input name="nombre" type="text" id="name" className="form-control" />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="lastname">Apellido</label>
+          <input name="lastname" type="text" id="lastname" className="form-control" />
+        </div>
+        <button className="btn btn-primary">Enviar</button>
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
