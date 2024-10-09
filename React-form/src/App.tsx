@@ -1,9 +1,7 @@
-import { ChangeEvent, FormEvent, useRef } from 'react';
+import { FormEvent } from 'react';
 import './App.css';
 
 function App() {
-  const nombre = useRef<HTMLInputElement>(null);
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); // Previene la recarga de la página
     const form = event.target as HTMLFormElement; // Obtenemos el formulario desde el evento
