@@ -1,5 +1,6 @@
 import { FormEvent } from 'react';
 import './App.css';
+import FormReactHook from './components/FormReactHook';
 
 function App() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -11,17 +12,7 @@ function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name">Nombre</label>
-          <input name="nombre" type="text" id="name" className="form-control" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="lastname">Apellido</label>
-          <input name="lastname" type="text" id="lastname" className="form-control" />
-        </div>
-        <button className="btn btn-primary">Enviar</button>
-      </form>
+      <FormReactHook></FormReactHook>
     </>
   );
 }
