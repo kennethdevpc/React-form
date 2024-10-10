@@ -2,21 +2,17 @@ import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
 type Props = {};
-type Form = {
-  //----creo este tipo para que acepte estos
-  name: string;
-  lastname: string;
-  nombre: string;
-};
+
 function FormReactHook({}: Props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Form>();
+  } = useForm();
   console.log('errores son', errors);
 
-  const onSubmit = (data: Form) => console.log("informacion Obtenida desde el 'register'", data);
+  const onSubmit = (data: FieldValues) =>
+    console.log("informacion Obtenida desde el 'register'", data);
 
   return (
     <div>
@@ -28,7 +24,7 @@ function FormReactHook({}: Props) {
             required: { value: true, message: 'Este campo es obligatorio' },
           })}
         />
-        {errors.nombre && <span>{errors?.nombre?.message}</span>}
+        {errors.nombre && <span>{errors?.nombre?.message?.toString()}</span>}
       </form>
     </div>
   );
