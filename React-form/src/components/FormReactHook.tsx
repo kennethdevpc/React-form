@@ -1,5 +1,4 @@
-import React from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { userSchema } from '../schemas/user';
 
 type Props = {};
