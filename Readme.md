@@ -536,7 +536,7 @@ export default Form;
     const optionalSchema = z.string().optional(); //----campo opcional
     ```
 
-  ### 31.2) Utilizando el esquema ZOD en el formulario, método `parse`
+  ## 31.2) Utilizando el esquema ZOD en el formulario, método `parse`
 
   - Aquí se muestra cómo utilizar el esquema de validación creado con ZOD dentro de un formulario de React usando `react-hook-form`.
   - Inicialmente, se utiliza el método `parse` para validar los datos, pero se advierte que **no es la forma recomendada** para manejar errores en formularios.
@@ -754,3 +754,87 @@ export default Form;
           }
         ]
       ```
+
+  ## 31.3) Método Resolver: Utilizando el resolver con Zod para manejar errores
+
+  - Ahora, se utiliza el método **resolver** en combinación con la biblioteca `@hookform/resolvers`, lo cual permite una mejor integración y manejo de los errores definidos en los esquemas de Zod.
+    Este enfoque elimina la necesidad de manejar manualmente los errores dentro de un `try-catch`, lo que simplifica el código y proporciona una manera más eficiente de trabajar con los formularios.
+
+  - Beneficios del Resolver:
+
+    - Con el zodResolver, los errores definidos en el esquema Zod son manejados automáticamente por react-hook-form, lo que proporciona una validación más eficiente.
+    - Evita el uso de estructuras try-catch para manejar errores y simplifica el código.
+    - Los errores se muestran directamente en los elementos de la UI asociados con cada campo del formulario.
+
+    - **Repositorio de resolvers:** [GitHub - react-hook-form/resolvers](https://github.com/react-hook-form/resolvers)
+    - **Instalación de la biblioteca:**
+
+      ```bash
+      npm install @hookform/resolvers@3.3.4
+      ```
+
+    - **Archivo:** `react-form/src/components/FormReactHookResolver.tsx`
+
+    ```typescript
+    import { useForm } from 'react-hook-form';
+    import { zodResolver } from '@hookform/resolvers/zod'; //---importo el resolver de Zod
+    import { userSchema } from '../schemas/user'; //---importo el mismo esquema
+    type Props = {};
+    const errorLetter = { color: 'black', fontWeight: 'bold' };
+    function FormReactHookResolver({}: Props) {
+      type Form = {
+        name: string;
+        lastName: string;
+        age: number;
+        email: string;
+        password: string;
+      };
+
+      const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm<Form>({
+        resolver: zodResolver(userSchema), //-----uso el resolver de Zod con el esquema
+      });
+
+      console.log('Errores validados por Zod:', errors);
+
+      const onsubmit = (data: Form) => {
+        console.log('Datos enviados:', data);
+      };
+
+      return (
+        <form
+          action=""
+          onSubmit={handleSubmit(onsubmit)}
+          style={{ display: 'flex', color: 'red', flexDirection: 'column', maxWidth: '300px' }}
+        >
+          <label htmlFor="">Name</label>
+          <input type="text" id="name" {...register('name')} />
+          {/* Muestra el error si existe */}
+          {errors.name && <span style={errorLetter}>{errors?.name?.message?.toString()}</span>}
+          <label htmlFor="">Last name</label>
+          <input type="text" id="lastName" {...register('lastName')} />
+          {errors.lastName && (
+            <span style={errorLetter}>{errors?.lastName?.message?.toString()}</span>
+          )}
+          <label htmlFor="">Age</label>
+          <input type="text" id="age" {...register('age')} />
+          {errors.age && <span style={errorLetter}>{errors?.age?.message?.toString()}</span>}
+          <label htmlFor="">Email</label>
+          <input type="text" id="email" {...register('email')} />
+          {errors.email && <span style={errorLetter}>{errors?.email?.message?.toString()}</span>}
+          <label htmlFor="">Password</label>
+          <input type="text" id="password" {...register('password')} />
+          {errors.password && (
+            <span style={errorLetter}>{errors?.password?.message?.toString()}</span>
+          )}
+          <br />
+          <button type="submit">Save</button>
+        </form>
+      );
+    }
+
+    export default FormReactHookResolver;
+    ```
