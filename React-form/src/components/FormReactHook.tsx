@@ -19,7 +19,7 @@ function FormReactHook({}: Props) {
     } catch (error) {
       //--------Capturo el error si el esquema no es válido
       // Para solucionar el error, se debe tipar explícitamente la variable error como 'Error' para que TypeScript lo reconozca como objeto de error.
-      console.log(`${(error as Error).message}`, 'jjjjjj');
+      console.log(`${(error as Error).message}`);
 
       //--------Verifico si el error contiene 'errors' para más detalles
       if (error instanceof Error && 'errors' in error) {
