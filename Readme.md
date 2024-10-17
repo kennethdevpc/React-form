@@ -1,3 +1,14 @@
+🌐 **[React hook form tutorial](https://www.react-hook-form.com/)**
+
+**<summary>**[React Hook Form](#rhf)**</summary>**
+
+---
+
+# 30) Paso a paso/ Step by Step
+
+<details>
+     <summary style="font-weight: bold; text-decoration: underline; cursor: pointer;">30) Formularios</summary>
+
 # 30) Formularios
 
 - #### u: `react-form`
@@ -72,7 +83,12 @@ export default Form;
 - proyect deployed: https://kpc-react-form.vercel.app/
 ```
 
-## 30.3) 💥 React Hook Form 💥
+</details>
+
+<details>
+     <summary style="font-weight: bold; text-decoration: underline; cursor: pointer;">30.3) 💥 React Hook Form 💥</summary>
+
+## <a name="rhf"></a> 30.3) 💥 React Hook Form 💥
 
 - #### u: `react-form\src\components\FormReactHook.tsx`
 - #### c: `npm i react-hook-form@7.51.3`
@@ -377,37 +393,42 @@ export default Form;
 
   - **Forma 2**: usando el tipo `FieldValues`
 
-    ```typescript
-    //---no se utiliza lel tipo Form, solo se usa el FieldValues de react hook
-    function FormReactHook({}: Props) {
-      const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm(); //------como se ve aqui no se usa el Form
-      console.log('errores son', errors);
-      //---------aquí se define la función onSubmit que recibe los datos como FieldValues
-      const onSubmit = (data: FieldValues) =>
-        console.log("informacion Obtenida desde el 'register'", data);
+        ```typescript
+        //---no se utiliza lel tipo Form, solo se usa el FieldValues de react hook
+        function FormReactHook({}: Props) {
+          const {
+            register,
+            handleSubmit,
+            formState: { errors },
+          } = useForm(); //------como se ve aqui no se usa el Form
+          console.log('errores son', errors);
+          //---------aquí se define la función onSubmit que recibe los datos como FieldValues
+          const onSubmit = (data: FieldValues) =>
+            console.log("informacion Obtenida desde el 'register'", data);
 
-      return (
-        <div>
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <input
-              type="text"
-              id="nombre"
-              {...register('nombre', {
-                required: { value: true, message: 'Este campo es obligatorio' },
-              })}
-            />
-            {errors.nombre && <span>{errors?.nombre?.message?.toString()}</span>}
-          </form>
-        </div>
-      );
-    }
+          return (
+            <div>
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <input
+                  type="text"
+                  id="nombre"
+                  {...register('nombre', {
+                    required: { value: true, message: 'Este campo es obligatorio' },
+                  })}
+                />
+                {errors.nombre && <span>{errors?.nombre?.message?.toString()}</span>}
+              </form>
+            </div>
+          );
+        }
 
-    export default FormReactHook;
-    ```
+        export default FormReactHook;
+        ```
+
+</details>
+
+<details>
+     <summary style="font-weight: bold; text-decoration: underline; cursor: pointer;">31) ZOD biblioteca</summary>
 
 # 31) ZOD biblioteca para manejo de formularios muy pesados
 
@@ -838,3 +859,5 @@ export default Form;
 
     export default FormReactHookResolver;
     ```
+
+</details>
