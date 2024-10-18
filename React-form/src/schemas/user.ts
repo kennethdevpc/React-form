@@ -23,3 +23,5 @@ export const userSchema = z.object({
       { message: 'password invalida' }
     ),
 });
+
+export type userForm = z.infer<typeof userSchema>;

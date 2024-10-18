@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { userSchema } from '../schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import { userForm as Form } from '../schemas/user'; //-----utilizndo el typo del schema, par apoder ahorrar codigo
 type Props = {};
 const errorLetter = { color: 'black', fontWeight: 'bold' };
 function FormReactHookResolver({}: Props) {
-  type Form = {
+  /* type Form = {  //-----lo utlizamos si no usamos el "type userForm" de el archivo "schemas/user.ts"
     name: string;
     lastName: string;
     age: number;
     email: string;
     password: string;
-  };
+  }; */
 
   const {
     register,
